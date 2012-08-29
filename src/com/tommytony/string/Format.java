@@ -23,4 +23,5 @@ public class Format {
 		str.append('.');
 		return str.toString();
 	}
+	
 }

@@ -1,3 +1,5 @@
+import java.util.List;
+
 import com.tommytony.math.MathExt;
 import com.tommytony.math.NegativeNumberException;
 import com.tommytony.string.Format;
@@ -14,5 +16,20 @@ public class Test {
 		System.out.print('\n');
 		System.out.println(Format.formatStringtoBasicSentence("i like cows very much"));
 		System.out.println(MathExt.factorial(0));
+		System.out.print("\n\n");
+		System.out.println("###############");
+		System.out.println("# Benchmarks  #");
+		System.out.println("###############");
+		
+		long start = System.nanoTime();
+		List<Integer> nums = MathExt.factor(60392830);
+		long time = System.nanoTime() - start;
+		System.out.println("Factoring 60392830 took " + time + "ns");
+		System.out.println("Factors: " + Format.formatListNumbers(nums));
+	    start = System.nanoTime();
+	    long fact = MathExt.factorial(19);
+	    time = System.nanoTime() - start;
+	    System.out.println("Calculating the factorial of 19 took " + time + "ns");
+	    System.out.println("19! = " + fact);
 	}
 }

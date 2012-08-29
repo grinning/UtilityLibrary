@@ -87,8 +87,10 @@ public class MathExt {
 		return (i % 2) == 1;
 	}
 	
-	public static int factorial(int i) {
-		int sum = 1;
+	public static long factorial(int i) throws NegativeNumberException {
+		if(MathExt.isNegative(i))
+			throw new NegativeNumberException();
+		long sum = 1;
 		for(; i > 0; i--) {
 			sum *= i;
 		}
