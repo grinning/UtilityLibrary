@@ -3,6 +3,8 @@ package com.tommytony.math;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tommytony.math.NegativeNumberException;
+
 public class MathExt {
 	
 	public static int gcd(int u, int v) throws NegativeNumberException {
@@ -38,7 +40,7 @@ public class MathExt {
 		boolean increment_thiscycle = false;
 		
 		
-		for(int i = 2; i < (j / (lowest_found)); i += increment) {
+		for(int i = 2; i < ((j / (lowest_found)) + 1); i += increment) {
 			if(increment_thiscycle) {
 				increment += 1;
 				increment_thiscycle = false;
@@ -49,7 +51,10 @@ public class MathExt {
 				//we need the lowest found to limit the numbers we need to check
 				if(lowest_found == 1)
 					lowest_found = i;
+				continue; //fixs flaw of code being able to go to i==2 if it is odd
 			}
+			//Code that is executed if a match isn't found
+			//this code executes if i == 2  and i was not a match therefore the number is odd
 			//number is Odd, we can skip all the evens
 			if(i == 2) {
 				increment_thiscycle = true;
