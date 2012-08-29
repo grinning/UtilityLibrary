@@ -88,9 +88,6 @@ public class MathExt {
 	}
 	
 	public static int factorial(int i) {
-		if(i == 0) {
-			return 1;
-		}
 		int sum = 1;
 		for(; i > 0; i--) {
 			sum *= i;

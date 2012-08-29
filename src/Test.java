@@ -13,5 +13,6 @@ public class Test {
 		System.out.print(MathExt.isPrime(2));
 		System.out.print('\n');
 		System.out.println(Format.formatStringtoBasicSentence("i like cows very much"));
+		System.out.println(MathExt.factorial(0));
 	}
 }
