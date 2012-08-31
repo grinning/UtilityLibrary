@@ -32,6 +32,54 @@ public class MathExt {
 		BigInteger.valueOf(1L * 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9 * 10 * 11 * 12 * 13 * 14 * 15 * 16 * 17 * 18 * 19 * 20)
 	};
 	
+	public static final long[] squaresBuffer = {
+		0,
+		1,
+		2 * 2,
+		3 * 3,
+		4 * 4,
+		5 * 5,
+		6 * 6,
+		7 * 7,
+		8 * 8,
+		9 * 9,
+		10 * 10,
+		11 * 11,
+		12 * 12,
+		13 * 13,
+		14 * 14,
+		15 * 15,
+		16 * 16,
+		17 * 17,
+		18 * 18,
+		19 * 19,
+		20 * 20
+	};
+	
+	public static final long[] cubesBuffer = {
+		0,
+		1,
+		2 * 2 * 2,
+		3 * 3 * 3,
+		4 * 4 * 4,
+		5 * 5 * 5,
+		6 * 6 * 6,
+		7 * 7 * 7,
+		8 * 8 * 8,
+		9 * 9 * 9,
+		10 * 10 * 10,
+		11 * 11 * 11,
+		12 * 12 * 12,
+		13 * 13 * 13,
+		14 * 14 * 14,
+		15 * 15 * 15,
+		16 * 16 * 16,
+		17 * 17 * 17,
+		18 * 18 * 18,
+		19 * 19 * 19,
+		20 * 20 * 20
+	};
+	
 	public static int gcd(int u, int v) throws NegativeNumberException {
 		if((MathExt.isNegative(u)) || (MathExt.isNegative(v)))
 			throw new NegativeNumberException();
@@ -124,5 +172,19 @@ public class MathExt {
 		        }
 		    return sum;
 		}
+	}
+	
+	public static long square(int i) {
+		if(i <= 20)
+			return squaresBuffer[i];
+		else
+			return i * i;
+	}
+	
+	public static long cube(int i) {
+		if(i <= 30)
+			return cubesBuffer[i];
+		else
+			return i * i * i;
 	}
 }
