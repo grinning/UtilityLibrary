@@ -24,4 +24,14 @@ public class Format {
 		return str.toString();
 	}
 	
+	public static String formatArrayNumbers(int[] l) {
+		StringBuilder str = new StringBuilder();
+		for(int i = 0; i < l.length; i++) {
+			str.append(l[i]);
+			if(i != l.length)
+				str.append(", ");
+		}
+		return str.toString();
+	}
+	
 }
