@@ -1,5 +1,6 @@
 package com.tommytony.math;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,10 +8,33 @@ import com.tommytony.math.NegativeNumberException;
 
 public class MathExt {
 	
+	//thqnk you reddit/Google Guava for the suggestion
+	public static final BigInteger[] factorialBuffer = {
+		BigInteger.ONE,
+		BigInteger.valueOf(1L * 2),
+		BigInteger.valueOf(1L * 2 * 3),
+		BigInteger.valueOf(1L * 2 * 3 * 4),
+		BigInteger.valueOf(1L * 2 * 3 * 4 * 5),
+		BigInteger.valueOf(1L * 2 * 3 * 4 * 5 * 6),
+		BigInteger.valueOf(1L * 2 * 3 * 4 * 5 * 6 * 7),
+		BigInteger.valueOf(1L * 2 * 3 * 4 * 5 * 6 * 7 * 8),
+		BigInteger.valueOf(1L * 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9),
+		BigInteger.valueOf(1L * 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9 * 10),
+		BigInteger.valueOf(1L * 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9 * 10 * 11),
+		BigInteger.valueOf(1L * 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9 * 10 * 11 * 12),
+		BigInteger.valueOf(1L * 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9 * 10 * 11 * 12 * 13),
+		BigInteger.valueOf(1L * 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9 * 10 * 11 * 12 * 13 * 14),
+		BigInteger.valueOf(1L * 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9 * 10 * 11 * 12 * 13 * 14 * 15),
+		BigInteger.valueOf(1L * 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9 * 10 * 11 * 12 * 13 * 14 * 15 * 16),
+		BigInteger.valueOf(1L * 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9 * 10 * 11 * 12 * 13 * 14 * 15 * 16 * 17),
+		BigInteger.valueOf(1L * 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9 * 10 * 11 * 12 * 13 * 14 * 15 * 16 * 17 * 18),
+		BigInteger.valueOf(1L * 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9 * 10 * 11 * 12 * 13 * 14 * 15 * 16 * 17 * 18 * 19),
+		BigInteger.valueOf(1L * 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9 * 10 * 11 * 12 * 13 * 14 * 15 * 16 * 17 * 18 * 19 * 20)
+	};
+	
 	public static int gcd(int u, int v) throws NegativeNumberException {
 		if((MathExt.isNegative(u)) || (MathExt.isNegative(v)))
 			throw new NegativeNumberException();
-		
 		if(u == v)
 			return u;
 		if(u == 0)
@@ -61,7 +85,6 @@ public class MathExt {
 			}
 			
 		}
-		
 		list.add(j);
 		return list;
 	}
@@ -87,13 +110,19 @@ public class MathExt {
 		return (i % 2) == 1;
 	}
 	
-	public static long factorial(int i) throws NegativeNumberException {
+	public static BigInteger factorial(int i) throws NegativeNumberException {
 		if(MathExt.isNegative(i))
 			throw new NegativeNumberException();
-		long sum = 1;
-		for(; i > 0; i--) {
-			sum *= i;
+		if(i == 0)
+			return BigInteger.valueOf(1L);
+		if(i <= 20)
+			return MathExt.factorialBuffer[i--];
+		else {
+		   BigInteger sum = BigInteger.ONE;
+		        for(; i > 0; i--) {
+			        sum = sum.multiply(BigInteger.valueOf(i));
+		        }
+		    return sum;
 		}
-		return sum;
 	}
 }

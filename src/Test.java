@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.List;
 
 import com.tommytony.math.MathExt;
@@ -27,7 +28,7 @@ public class Test {
 		System.out.println("Factoring 60392830 took " + time + "ns");
 		System.out.println("Factors: " + Format.formatListNumbers(nums));
 	    start = System.nanoTime();
-	    long fact = MathExt.factorial(19);
+	    BigInteger fact = MathExt.factorial(19);
 	    time = System.nanoTime() - start;
 	    System.out.println("Calculating the factorial of 19 took " + time + "ns");
 	    System.out.println("19! = " + fact);
