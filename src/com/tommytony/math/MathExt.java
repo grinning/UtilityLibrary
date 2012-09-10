@@ -183,6 +183,7 @@ public class MathExt {
 	
 	public static long cube(int i) {
 		if(i <= 30)
+		if(i <= 20)
 			return cubesBuffer[i];
 		else
 			return i * i * i;
