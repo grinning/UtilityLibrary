@@ -1,5 +1,7 @@
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import com.tommytony.math.MathExt;
 import com.tommytony.math.NegativeNumberException;
@@ -17,6 +19,10 @@ public class Test {
 		System.out.print('\n');
 		System.out.println(Format.formatStringtoBasicSentence("i like cows very much"));
 		System.out.println(MathExt.factorial(0));
+		ThreadLocalRandom rand = ThreadLocalRandom.current();
+		int num = rand.nextInt(30) + 2;
+		int pow = rand.nextInt(6, 20);
+		System.out.println("Concurrent power of " + num + " to the " + pow + " is " + MathExt.concurrentPower(num, pow));
 		System.out.print("\n\n");
 		System.out.println("###############");
 		System.out.println("# Benchmarks  #");
