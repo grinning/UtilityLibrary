@@ -188,4 +188,12 @@ public class MathExt {
 		else
 			return i * i * i;
 	}
+	public double alogn(float f) {
+		return Math.pow(Math.E, f);
+	}
+	
+	public double alogn(double d) {
+		return Math.pow(Math.E, d);
+		
+	}
 }
