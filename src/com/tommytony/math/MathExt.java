@@ -3,10 +3,19 @@ package com.tommytony.math;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ForkJoinPool;
 
 import com.tommytony.math.NegativeNumberException;
 
 public class MathExt {
+	
+	static {
+		pool = new ForkJoinPool();
+	}
+	
+	private static ForkJoinPool pool;
+	
+	private volatile static BigInteger con_pow;
 	
 	//thqnk you reddit/Google Guava for the suggestion
 	public static final BigInteger[] factorialBuffer = {
@@ -182,12 +191,47 @@ public class MathExt {
 	}
 	
 	public static long cube(int i) {
-		if(i <= 30)
 		if(i <= 20)
 			return cubesBuffer[i];
 		else
 			return i * i * i;
 	}
+	
+	public static BigInteger concurrentPower(int i, int pow) {
+		if(pow < 4) {
+			if(pow == 0)
+				return BigInteger.ONE;
+			else if(pow == 1)
+				return BigInteger.valueOf(i);
+			else {
+				BigInteger result = BigInteger.valueOf(i);
+				for(int j = 1; j < pow; i++) {
+					result = result.multiply(result);
+				}
+				return result;
+			}
+		} else {
+			MathExt.con_pow = BigInteger.ONE;
+			boolean isOdd = false;
+			if(MathExt.isOdd(pow))
+				isOdd = true;
+			int halfFactor = pow / 2;
+			int inc = (isOdd) ? 1 : 0;
+			PowerTask one = new PowerTask(i, halfFactor + inc);
+			PowerTask two = new PowerTask(i, halfFactor);
+			pool.execute(one);
+			pool.execute(two);
+			while(!(one.isDone()) && !(two.isDone())) {
+			    try {
+					Thread.sleep(0, 10);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			return MathExt.con_pow;
+		}
+	}
+	
 	public double alogn(float f) {
 		return Math.pow(Math.E, f);
 	}
@@ -195,5 +239,9 @@ public class MathExt {
 	public double alogn(double d) {
 		return Math.pow(Math.E, d);
 		
+	}
+	
+	protected static synchronized void addToPow(BigInteger num) {
+		MathExt.con_pow = MathExt.con_pow.multiply(num);
 	}
 }
