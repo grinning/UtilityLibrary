@@ -89,6 +89,14 @@ public class MathExt {
 		20 * 20 * 20
 	};
 	
+	/**
+	 *Returns the greatest common factor of two positive integers
+	 *
+	 *@param u  First integer  
+	 *@param v  Second integer
+	 *@return The greatest common factor of the two numbers 
+	 *@throws NegativeNumberException If one of the two integer arguments is negative
+	 */
 	public static int gcd(int u, int v) throws NegativeNumberException {
 		if((MathExt.isNegative(u)) || (MathExt.isNegative(v)))
 			throw new NegativeNumberException();
@@ -110,9 +118,17 @@ public class MathExt {
 		return MathExt.gcd((v - u) >> 1, u);
 	}
 	
+	/**
+	 * Factors the given integer and returns a list of the integers
+	 * 
+	 * @param j The integer to factor
+	 * @return List of factors
+	 * @throws IllegalArgumentException If the integer is less than or equal to zero
+	 * @see List
+	 */
 	public static List<Integer> factor(int j) {
-		if((j == 0) || j < 0)
-			return null;
+		if(j <= 0)
+			throw new IllegalArgumentException();
 		List<Integer> list = new ArrayList<Integer>();
 		list.add(1);
 		
@@ -146,7 +162,11 @@ public class MathExt {
 		return list;
 	}
 	
-	
+	/**
+	 * Returns if the integer is prime no matter its size
+	 * @param i
+	 * @return If the integer is prime or not
+	 */
 	public static boolean isPrime(int i) {
 		return (MathExt.factor(i).size() == 2); //if only 2 then the factors with be 1 and number
 	}
@@ -172,8 +192,11 @@ public class MathExt {
 			throw new NegativeNumberException();
 		if(i == 0)
 			return BigInteger.valueOf(1L);
-		if(i <= 20)
+		if(i <= 20) {
+			//simplifies proxy instruction to addl %<reg>, $-1
+			//instead of a middleman
 			return MathExt.factorialBuffer[i--];
+		}
 		else {
 		   BigInteger sum = BigInteger.ONE;
 		        for(; i > 0; i--) {
@@ -238,9 +261,8 @@ public class MathExt {
 	
 	public double alogn(double d) {
 		return Math.pow(Math.E, d);
-		
 	}
-	
+
 	protected static synchronized void addToPow(BigInteger num) {
 		MathExt.con_pow = MathExt.con_pow.multiply(num);
 	}

@@ -23,6 +23,7 @@ public class PowerTask extends RecursiveAction {
 			temp = temp.multiply(num);
 		}
 		MathExt.addToPow(num);
+		System.out.println("My number is " + num + " with " + iters + " iters calc: " + temp.longValue());
 	}
 
 }
