@@ -46,7 +46,7 @@ public class ArgumentParser {
 			count++;
 			if (needSpace && c != ' ') {
 				// If the next char should be a space and it's not, error.
-				/*debug*/System.out.println(needSpace+" "+inDash+" "+dashCount+" "+tempFullName+" "+flagNeedsArg+" "+tempArg+" "+count);
+				/*debug*///System.out.println(needSpace+" "+inDash+" "+dashCount+" "+tempFullName+" "+flagNeedsArg+" "+tempArg+" "+count);
 				throw new InputMismatchException("Position: " + count + ". Error: Expected a space");
 			} else if (needSpace && c == ' ') {
 				needSpace = false;
