@@ -89,6 +89,11 @@ public class MathExt {
 		20 * 20 * 20
 	};
 	
+	public static final int[] log2LookupTable = {
+		0, 9, 1, 10, 13, 21, 2, 29, 11, 14, 16, 18, 22, 25, 3, 30,
+		8, 12, 20, 28, 15, 17, 24, 7, 19, 27, 23, 6, 26, 5, 4, 31
+	};
+	
 	/**
 	 *Returns the greatest common factor of two positive integers
 	 *
@@ -262,7 +267,28 @@ public class MathExt {
 	public double alogn(double d) {
 		return Math.pow(Math.E, d);
 	}
-
+	
+	int logBase2(int i) {
+		i |= i >> 1;
+		i |= i >> 2;
+		i |= i >> 4;
+		i |= i >> 8;
+		i |= i >> 16;
+		return MathExt.log2LookupTable[(int)(i * 0x07C4ACDD) >> 27];
+	}
+	
+	float rsqrt(float number) {
+		long i;
+		float x, y;
+		final float threehalfs = 1.5f;
+		x = number * 0.5f;
+		y = number;
+		i = (long) y;
+		i = 0x5f3759df - (i >> 1);
+		y = (float) i;
+		return (y * (threehalfs - (x * y * y)));
+	}
+	
 	protected static synchronized void addToPow(BigInteger num) {
 		MathExt.con_pow = MathExt.con_pow.multiply(num);
 	}
