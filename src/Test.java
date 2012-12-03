@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.tommytony.io.CStdLib;
+import com.tommytony.io.CStyleMemory;
 import com.tommytony.io.SystemIO;
 import com.tommytony.math.MathExt;
 import com.tommytony.math.NegativeNumberException;
@@ -58,15 +59,11 @@ public class Test implements Runnable {
 	    CStdLib.unsafe.putInt(add, integer);
 	    System.out.println(CStdLib.unsafe.getInt(add));
 	    CStdLib.free(add);
-	    UnsafeStringAppender app = new UnsafeStringAppender("dog", 20);
-	    app.append(" cat");
-	    System.out.println(app.toString());
-	    app.deallocate();
-	    System.out.println((int) 'c');
-	    System.out.println((int) 'b');
-	    System.out.println((int) 'C');
-	    System.out.println((int) '0');
-	    System.out.println((int) '1');
+	    CStyleMemory memBank = new CStyleMemory(1024); //1kb of sexylicious manually allocated memory
+	    int pointer = memBank.malloc(4);
+	    memBank.put(pointer, new byte[] {(byte)0, (byte)0, (byte)0, (byte)5});
+	    memBank.free(pointer);
+	    memBank.cleanup();
 	    System.gc();
 	    System.exit(0);
 	}
